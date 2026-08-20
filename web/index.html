@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mini-PgDog — Live Router</title>
+<style>
+:root{--bg:#071019;--panel:#0d1924;--line:#213442;--muted:#8295a5;--text:#e9f2f7;--cyan:#58d6d0;--green:#70df9b;--orange:#ffb454;--red:#ff6b72;--purple:#ae8cff}*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;background:radial-gradient(circle at 45% -10%,#183647 0,#071019 42%);color:var(--text);font:14px Inter,ui-sans-serif,system-ui;min-height:100vh}.shell{max-width:1440px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.logo{width:42px;height:42px;flex:0 0 42px;border:1px solid #4b7c83;border-radius:12px;display:grid;place-items:center;color:var(--cyan);font-size:21px;background:#10242e}.brand h1{font-size:18px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}.live{font-size:12px;color:var(--green);display:flex;gap:8px;align-items:center;white-space:nowrap}.dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:12px}.card,.panel{min-width:0;background:linear-gradient(145deg,rgba(16,31,43,.94),rgba(10,22,31,.94));border:1px solid var(--line);border-radius:12px}.stat{padding:14px 16px}.label{color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-size:10px}.value{font-size:25px;font-weight:650;margin-top:5px}.value small{font-size:11px;color:var(--muted);font-weight:400}.main{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(340px,.7fr);gap:12px}.panel{padding:16px}.head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}.head h2{font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin:0}.head span{color:var(--muted);font-size:11px}.topology{height:280px;position:relative;display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:center;gap:50px;padding:20px}.connections{position:absolute;inset:0;pointer-events:none}.wire{position:absolute;height:2px;background:#24414d;overflow:visible}.wire.one{left:24%;right:51%;top:50%}.wire.two{left:51%;right:23%;top:36%;transform:rotate(-18deg)}.wire.three{left:51%;right:23%;top:63%;transform:rotate(18deg)}.packet{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:flow 1.4s linear infinite}.wire .packet:nth-child(2){animation-delay:-.7s}@keyframes flow{from{left:0}to{left:100%}}.node{position:relative;z-index:2;background:#0c1a24;border:1px solid #29404e;border-radius:12px;padding:15px;text-align:center;box-shadow:0 12px 30px #0005}.node.proxy{border-color:#3c777b;box-shadow:0 0 28px #3c777b22}.icon{font-size:23px;margin-bottom:8px}.node b{display:block}.node small{display:block;color:var(--muted);margin-top:4px}.badge{display:inline-flex;margin-top:9px;padding:3px 7px;border-radius:20px;font-size:10px;background:#17382a;color:var(--green)}.backend{display:grid;gap:16px}.down{border-color:#73333a!important;opacity:.65}.down .badge{background:#3c1e24;color:var(--red)}.pool{display:flex;justify-content:center;gap:5px;margin-top:11px;flex-wrap:wrap}.slot{width:13px;height:22px;border-radius:3px;border:1px solid #36626a;background:#15343c}.slot.busy{background:var(--cyan);box-shadow:0 0 7px #58d6d066}.slot.queue{background:var(--orange);border-color:var(--orange)}.redis{position:absolute;bottom:5px;left:45%;z-index:3;color:var(--purple);font-size:11px;background:#17152a;border:1px solid #3a3458;border-radius:8px;padding:6px 10px}.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.btn{appearance:none;background:#112431;color:var(--text);border:1px solid #2a4352;border-radius:8px;padding:10px 8px;font:inherit;font-size:12px;cursor:pointer}.btn:hover{border-color:var(--cyan);background:#15313b}.btn.danger{color:#ff9297;border-color:#6a3439}.sliders{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.slider label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}input[type=range]{width:100%;accent-color:var(--cyan);margin-top:8px}.stream{height:247px;overflow:hidden}.row{display:grid;grid-template-columns:54px 60px minmax(0,1fr) 76px 52px;gap:8px;align-items:center;border-top:1px solid #192d3a;padding:8px 3px;font-size:11px}.row:first-child{border:0}.tag{border-radius:4px;padding:3px 5px;text-align:center;font-size:9px;font-weight:bold}.tag.read{background:#123a3b;color:var(--cyan)}.tag.write{background:#3a2d18;color:var(--orange)}.sql{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#bfd0da}.target{color:var(--green)}.latency{text-align:right;color:var(--muted)}.bottom{display:grid;grid-template-columns:1.4fr .8fr;gap:12px;margin-top:12px}.chart{height:120px;width:100%}.events{height:140px;overflow:auto}.event{display:flex;gap:9px;padding:6px 0;border-bottom:1px solid #192d3a;font-size:11px}.event time{color:#587080}.event.danger span{color:var(--red)}.event.warning span{color:var(--orange)}.event.success span{color:var(--green)}@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.main,.bottom{grid-template-columns:1fr}.topology{height:260px;gap:20px}.controls{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.shell{padding:14px}.top{align-items:flex-start}.brand p{max-width:210px}.live{font-size:10px;margin-top:5px}.stats{gap:8px}.stat{padding:12px}.value{font-size:21px}.topology{height:auto;min-height:440px;grid-template-columns:1fr;gap:12px;padding:12px 30px}.connections{display:none}.redis{position:relative;left:auto;bottom:auto;justify-self:center}.node{padding:11px}.backend{gap:12px}.sliders{grid-template-columns:1fr}.row{grid-template-columns:48px 52px minmax(90px,1fr) 66px 42px;gap:5px;font-size:10px}.panel{padding:12px}.head span{font-size:10px}}
+</style></head><body><div class="shell">
+<header class="top"><div class="brand"><div class="logo">◈</div><div><h1>Mini-PgDog</h1><p>health-aware PostgreSQL router · live simulation</p></div></div><div class="live"><i class="dot"></i> SYSTEM LIVE</div></header>
+<section class="stats"><div class="card stat"><div class="label">Requests routed</div><div class="value" id="total">1,284</div></div><div class="card stat"><div class="label">Read / write split</div><div class="value"><span id="split">72 / 28</span><small> %</small></div></div><div class="card stat"><div class="label">Pool utilization</div><div class="value"><span id="util">3 / 5</span><small> slots</small></div></div><div class="card stat"><div class="label">Queue depth</div><div class="value" id="queued">1</div></div><div class="card stat"><div class="label">Avg latency</div><div class="value"><span id="latency">11</span><small> ms</small></div></div></section>
+<main class="main"><section class="panel"><div class="head"><h2>Live topology</h2><span>SQL inspection → route → pool</span></div><div class="topology"><div class="connections"><div class="wire one"><i class="packet"></i><i class="packet"></i></div><div class="wire two"><i class="packet"></i></div><div class="wire three"><i class="packet"></i></div></div><div class="node"><div class="icon">▦</div><b>50 clients</b><small id="rateLabel">8 requests / sec</small><span class="badge">CONNECTED</span></div><div class="node proxy"><div class="icon">◈</div><b>PgDog Router</b><small>regex SQL classifier</small><div class="pool" id="pool"></div><small id="poolLabel">bounded pool · 5 slots</small></div><div class="backend"><div class="node"><div class="icon">⬡</div><b>Primary</b><small>reads fallback + writes</small><span class="badge">HEALTHY</span></div><div class="node" id="replica"><div class="icon">⬡</div><b>Replica</b><small>read traffic</small><span class="badge" id="replicaBadge">HEALTHY</span></div></div><div class="redis" id="redis">◆ Redis: replica:healthy</div></div>
+<div class="controls"><button class="btn" id="selectButton">▶ Send SELECT</button><button class="btn" id="insertButton">＋ Send INSERT</button><button class="btn" id="burstButton">⚡ Traffic burst</button><button class="btn danger" id="kill">■ Kill replica</button></div>
+<div class="sliders"><div class="slider"><label>Pool slots <b id="poolV">5</b></label><input id="poolRange" type="range" min="1" max="12" value="5"></div><div class="slider"><label>Requests/sec <b id="rateV">8</b></label><input id="rateRange" type="range" min="1" max="50" value="8"></div><div class="slider"><label>Read traffic <b id="readsV">72%</b></label><input id="readsRange" type="range" min="0" max="100" value="72"></div></div></section>
+<section class="panel"><div class="head"><h2>Request stream</h2><span id="streamStatus">LIVE</span></div><div class="stream" id="stream"></div><button class="btn" style="width:100%;margin-top:8px" id="pause">Ⅱ Pause live traffic</button></section></main>
+<section class="bottom"><div class="panel"><div class="head"><h2>Latency</h2><span>last 40 routed queries · ms</span></div><svg class="chart" id="chart" viewBox="0 0 800 120" preserveAspectRatio="none"></svg></div><div class="panel"><div class="head"><h2>Health & routing log</h2><span><b id="fallbacks">0</b> failovers</span></div><div class="events" id="events"></div></div></section>
+</div><script>
+'use strict';
+const $=id=>document.getElementById(id);
+const randomInt=(minimum,maximum)=>Math.floor(Math.random()*(maximum-minimum+1))+minimum;
+const choice=items=>items[randomInt(0,items.length-1)];
+const rounded=value=>{const lower=Math.floor(value),fraction=value-lower;return fraction<.5?lower:fraction>.5?lower+1:lower%2===0?lower:lower+1};
+const clock=()=>new Date().toLocaleTimeString('en-GB',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+const cappedPush=(items,value,limit)=>{items.push(value);if(items.length>limit)items.shift()};
+const cappedUnshift=(items,value,limit)=>{items.unshift(value);if(items.length>limit)items.pop()};
+
+const demo={
+  started:Date.now(),replica_up:true,redis_healthy:true,pool_size:5,rate:8,read_percent:72,auto:true,
+  next_id:1042,requests:[],events:[],latencies:[12,9,14,11,8,15,10,13,9,12],
+  total:1284,reads:918,writes:366,fallbacks:0,active:3,queued:1,
+  healthTimer:null,burstTimers:[]
+};
+
+function addEvent(kind,message){cappedUnshift(demo.events,{kind,message,at:clock()},30)}
+function addRequest(kind,sql,target,latency){
+  demo.next_id+=1;
+  cappedUnshift(demo.requests,{id:demo.next_id,kind,sql,target,latency,at:clock()},28);
+}
+
+function initialize(){
+  addEvent('system','Demo traffic started — 50 clients share 5 backend slots');
+  [
+    ['read','SELECT * FROM orders WHERE id = 8421','replica'],
+    ['read','SELECT count(*) FROM events','replica'],
+    ['write','UPDATE inventory SET stock = stock - 1','primary'],
+    ['read','SELECT name, plan FROM customers LIMIT 20','replica'],
+    ['write','INSERT INTO audit_log VALUES (…) ','primary']
+  ].forEach(([kind,sql,target])=>addRequest(kind,sql,target,randomInt(7,18)));
+}
+
+function tick(){
+  if(!demo.auto)return;
+  const readSql=["SELECT * FROM orders WHERE status = 'paid'",'SELECT count(*) FROM sessions','SELECT sku, stock FROM inventory LIMIT 50','SELECT region, sum(total) FROM orders GROUP BY region'];
+  const writeSql=['INSERT INTO events (type, payload) VALUES (…) ','UPDATE inventory SET stock = stock - 1','INSERT INTO audit_log (actor, action) VALUES (…) '];
+  const burst=Math.max(1,rounded(demo.rate/4));
+  const capacity=demo.pool_size;
+  demo.active=Math.min(capacity,randomInt(Math.max(1,capacity-2),capacity));
+  const demand=Math.max(0,rounded(demo.rate*(.5+Math.random()*.85))-capacity);
+  demo.queued=Math.min(50,demand);
+  for(let index=0;index<burst;index+=1){
+    const read=randomInt(0,99)<demo.read_percent;
+    const kind=read?'read':'write';
+    const target=read&&demo.redis_healthy?'replica':'primary';
+    let latency=randomInt(6,16)+demo.queued*2;
+    if(read&&!demo.redis_healthy){latency+=9;demo.fallbacks+=1}
+    demo.total+=1;demo.reads+=read?1:0;demo.writes+=read?0:1;
+    cappedPush(demo.latencies,latency,40);
+    addRequest(kind,choice(read?readSql:writeSql),target,latency);
+  }
+}
+
+function healthSync(){
+  demo.redis_healthy=demo.replica_up;
+  if(demo.replica_up)addEvent('success','Health check passed → Redis replica:healthy');
+  else addEvent('danger','Health check failed → Redis replica:down; reads fail over');
+  render();
+}
+
+function endBurst(){demo.rate=8;addEvent('success','Burst drained — pool queue returned to normal');render()}
+
+function action(actionName,kind){
+  if(actionName==='replica'){
+    demo.replica_up=!demo.replica_up;
+    if(!demo.replica_up)addEvent('danger','Replica stopped — health check will detect it in 1s');
+    else addEvent('success','Replica restarted — waiting for health check');
+    window.setTimeout(healthSync,1000);
+  }else if(actionName==='burst'){
+    demo.rate=42;
+    addEvent('warning','Traffic burst: 42 req/s hitting the bounded pool');
+    demo.burstTimers.push(window.setTimeout(endBurst,5000));
+  }else if(actionName==='query'){
+    const requestKind=kind||'read';
+    const read=requestKind==='read';
+    const target=read&&demo.redis_healthy?'replica':'primary';
+    const latency=randomInt(7,16)+(read&&target==='primary'?9:0);
+    demo.total+=1;demo.reads+=read?1:0;demo.writes+=read?0:1;
+    demo.fallbacks+=read&&target==='primary'?1:0;
+    const sql=read?'SELECT * FROM orders WHERE id = 8421':'INSERT INTO orders (customer_id, total) VALUES (104, 89.00)';
+    addRequest(requestKind,sql,target,latency);cappedPush(demo.latencies,latency,40);
+    addEvent('route',`Manual ${requestKind.toUpperCase()} routed to ${target}`);
+  }else if(actionName==='settings'){
+    demo.pool_size=Math.max(1,Math.min(12,Number.parseInt($('poolRange').value,10)));
+    demo.rate=Math.max(1,Math.min(50,Number.parseInt($('rateRange').value,10)));
+    demo.read_percent=Math.max(0,Math.min(100,Number.parseInt($('readsRange').value,10)));
+  }else if(actionName==='auto'){
+    demo.auto=!demo.auto;addEvent('system',demo.auto?'Traffic resumed':'Traffic paused');
+  }
+  render();
+}
+
+function averageLatency(){return rounded(demo.latencies.reduce((sum,value)=>sum+value,0)/demo.latencies.length)}
+function render(){
+  $('total').textContent=demo.total.toLocaleString();
+  $('split').textContent=`${rounded(demo.reads/demo.total*100)} / ${rounded(demo.writes/demo.total*100)}`;
+  $('util').textContent=`${demo.active} / ${demo.pool_size}`;$('queued').textContent=demo.queued;$('queued').style.color=demo.queued>6?'var(--orange)':'inherit';
+  $('latency').textContent=averageLatency();$('rateLabel').textContent=`${demo.rate} requests / sec`;$('poolLabel').textContent=`bounded pool · ${demo.pool_size} slots`;
+  $('fallbacks').textContent=demo.fallbacks;$('replica').classList.toggle('down',!demo.replica_up);$('replicaBadge').textContent=demo.replica_up?'HEALTHY':'OFFLINE';
+  $('kill').textContent=demo.replica_up?'■ Kill replica':'↻ Restart replica';$('redis').textContent=`◆ Redis: replica:${demo.redis_healthy?'healthy':'down'}`;$('redis').style.color=demo.redis_healthy?'var(--purple)':'var(--red)';
+  $('pause').textContent=demo.auto?'Ⅱ Pause live traffic':'▶ Resume live traffic';$('streamStatus').textContent=demo.auto?'LIVE':'PAUSED';
+  if(document.activeElement?.type!=='range'){
+    [['pool',demo.pool_size],['rate',demo.rate],['reads',demo.read_percent]].forEach(([name,value])=>{$(name+'Range').value=value;$(name+'V').textContent=value+(name==='reads'?'%':'')});
+  }
+  $('pool').innerHTML=Array.from({length:demo.pool_size},(_,index)=>`<i class="slot ${index<demo.active?'busy':''}"></i>`).join('')+(demo.queued?'<i class="slot queue"></i>':'');
+  $('stream').innerHTML=demo.requests.slice(0,12).map(request=>`<div class="row"><span>${request.at}</span><span class="tag ${request.kind}">${request.kind.toUpperCase()}</span><span class="sql">${request.sql}</span><span class="target">→ ${request.target}</span><span class="latency">${request.latency}ms</span></div>`).join('');
+  $('events').innerHTML=demo.events.map(event=>`<div class="event ${event.kind}"><time>${event.at}</time><span>${event.message}</span></div>`).join('');
+  const maximum=Math.max(45,...demo.latencies);
+  const points=demo.latencies.map((value,index)=>`${demo.latencies.length===1?0:index/(demo.latencies.length-1)*800},${110-value/maximum*94}`).join(' ');
+  $('chart').innerHTML=`<defs><linearGradient id="g" x2="0" y2="1"><stop stop-color="#58d6d0" stop-opacity=".35"/><stop offset="1" stop-color="#58d6d0" stop-opacity="0"/></linearGradient></defs><path d="M0 110 L${points} L800 110Z" fill="url(#g)"/><polyline points="${points}" fill="none" stroke="#58d6d0" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="0" y1="110" x2="800" y2="110" stroke="#29404e"/>`;
+}
+
+$('selectButton').addEventListener('click',()=>action('query','read'));
+$('insertButton').addEventListener('click',()=>action('query','write'));
+$('burstButton').addEventListener('click',()=>action('burst'));
+$('kill').addEventListener('click',()=>action('replica'));
+$('pause').addEventListener('click',()=>action('auto'));
+['pool','rate','reads'].forEach(name=>$(name+'Range').addEventListener('input',event=>{$(name+'V').textContent=event.target.value+(name==='reads'?'%':'');action('settings')}));
+initialize();render();window.setInterval(()=>{tick();render()},600);
+</script></body></html>
